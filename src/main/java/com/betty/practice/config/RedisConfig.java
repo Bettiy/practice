@@ -26,10 +26,10 @@ public class RedisConfig {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         //设置Redis的链接工厂
         redisTemplate.setConnectionFactory(redisConnectionFactory);
-        //TODO：指定大Key序列化策略为String序列化，Value为JDK自带的序列化策略
+        // 指定大Key序列化策略为String序列化，Value为JDK自带的序列化策略
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-        //TODO：指定hashKey序列化策略为String序列化-针对hash散列存储
+        // 指定hashKey序列化策略为String序列化-针对hash散列存储
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
         return redisTemplate;
