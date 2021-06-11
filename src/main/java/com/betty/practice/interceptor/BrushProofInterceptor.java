@@ -3,7 +3,7 @@ package com.betty.practice.interceptor;
 import com.alibaba.fastjson.JSON;
 import com.betty.practice.utils.result.ResultInfo;
 import com.betty.practice.utils.result.CommonEnum;
-import com.betty.practice.target.AccessLimit;
+import com.betty.practice.annotation.AccessLimit;
 import com.betty.practice.utils.redis.RedisUtils;
 import com.betty.practice.utils.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,10 +6,10 @@ import com.betty.practice.dao.UserMapper;
 import com.betty.practice.dao.UserMapper1;
 import com.betty.practice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 /**
@@ -21,10 +21,10 @@ import java.util.Date;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserMapper mapper;
 
-    @Autowired
+    @Resource
     private UserMapper1 mapper1;
 
 

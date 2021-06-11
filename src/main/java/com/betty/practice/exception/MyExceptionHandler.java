@@ -4,9 +4,7 @@ import com.betty.practice.utils.result.CommonEnum;
 import com.betty.practice.utils.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
@@ -14,8 +12,6 @@ import java.io.IOException;
  * @author Betty
  * @date 2021年04月26日
  */
-@RestController
-@ControllerAdvice
 @Slf4j
 public class MyExceptionHandler {
 

@@ -1,9 +1,10 @@
 package com.betty.practice.controller;
 
+import com.betty.practice.annotation.Log;
 import com.betty.practice.bean.User;
 import com.betty.practice.dao.UserMapper;
 import com.betty.practice.service.UserService;
-import com.betty.practice.target.AccessLimit;
+import com.betty.practice.annotation.AccessLimit;
 import com.betty.practice.utils.redis.RedisUtils;
 import com.betty.practice.utils.result.CommonEnum;
 import com.betty.practice.utils.result.Result;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,15 +34,16 @@ public class HelloController {
     @Autowired
     private UserService userService;
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
-    @Autowired
+    @Resource
     private RedisUtils redisUtils;
 
     @AccessLimit(seconds = 3600, maxCount = 5)
     @ApiOperation("测试接口1")
-    @GetMapping("hello")
+    @PostMapping("hello")
+    @Log
     public Result hello(@ApiParam(name = "测试参数姓名") String name) {
         User user = new User(null,"张三", 18, "女");
         log.info("hello,{}是一个憨憨", user.getUsername());

@@ -2,11 +2,11 @@ package com.betty.practice.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.betty.practice.bean.User;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author Betty
  */
-@Repository
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
 }
