@@ -28,7 +28,7 @@ public class ExecutorConfig {
     private int queueCapacity;
     private String namePrefix;
 
-    @Bean("asyncServiceExecutor")
+    @Bean
     public Executor asyncServiceExecutor() {
         log.info("start asyncServiceExecutor");
         ThreadPoolTaskExecutor executor = new VisibleThreadPoolTaskExecutor();

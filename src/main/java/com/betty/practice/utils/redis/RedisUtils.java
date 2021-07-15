@@ -28,6 +28,7 @@ public class RedisUtils {
      * @param offset   位 8Bit=1Byte
      * @return
      */
+    @SuppressWarnings("unchecked")
     public boolean setBit(String key, long offset, boolean isShow) {
         boolean result = false;
         try {
@@ -47,6 +48,7 @@ public class RedisUtils {
      * @param offset
      * @return
      */
+    @SuppressWarnings({"unchecked", "ConstantConditions"})
     public boolean getBit(String key, long offset) {
         boolean result = false;
         try {
@@ -66,6 +68,7 @@ public class RedisUtils {
      * @param value
      * @return
      */
+    @SuppressWarnings("unchecked")
     public boolean set(final String key, Object value) {
         boolean result = false;
         try {
@@ -85,6 +88,7 @@ public class RedisUtils {
      * @param value
      * @return
      */
+    @SuppressWarnings("unchecked")
     public boolean set(final String key, Object value, Long expireTime) {
         boolean result = false;
         try {
@@ -115,6 +119,7 @@ public class RedisUtils {
      *
      * @param key
      */
+    @SuppressWarnings("unchecked")
     public void remove(final String key) {
         if (exists(key)) {
             redisTemplate.delete(key);
@@ -127,6 +132,7 @@ public class RedisUtils {
      * @param key
      * @return
      */
+    @SuppressWarnings({"unchecked","ConstantConditions"})
     public boolean exists(final String key) {
         return redisTemplate.hasKey(key);
     }
@@ -137,6 +143,7 @@ public class RedisUtils {
      * @param key
      * @return
      */
+    @SuppressWarnings("unchecked")
     public Object get(final String key) {
         Object result = null;
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
@@ -151,6 +158,7 @@ public class RedisUtils {
      * @param hashKey
      * @param value
      */
+    @SuppressWarnings("unchecked")
     public void hmSet(String key, Object hashKey, Object value) {
         HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
         hash.put(key, hashKey, value);
@@ -163,6 +171,7 @@ public class RedisUtils {
      * @param hashKey
      * @return
      */
+    @SuppressWarnings("unchecked")
     public Object hmGet(String key, Object hashKey) {
         HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
         return hash.get(key, hashKey);
@@ -174,6 +183,7 @@ public class RedisUtils {
      * @param k
      * @param v
      */
+    @SuppressWarnings("unchecked")
     public void lPush(String k, Object v) {
         ListOperations<String, Object> list = redisTemplate.opsForList();
         list.rightPush(k, v);
@@ -187,6 +197,7 @@ public class RedisUtils {
      * @param l1
      * @return
      */
+    @SuppressWarnings("unchecked")
     public List<Object> lRange(String k, long l, long l1) {
         ListOperations<String, Object> list = redisTemplate.opsForList();
         return list.range(k, l, l1);
@@ -198,6 +209,7 @@ public class RedisUtils {
      * @param key
      * @param value
      */
+    @SuppressWarnings("unchecked")
     public void add(String key, Object value) {
         SetOperations<String, Object> set = redisTemplate.opsForSet();
         set.add(key, value);
@@ -209,6 +221,7 @@ public class RedisUtils {
      * @param key
      * @return
      */
+    @SuppressWarnings("unchecked")
     public Set<Object> setMembers(String key) {
         SetOperations<String, Object> set = redisTemplate.opsForSet();
         return set.members(key);
@@ -221,6 +234,7 @@ public class RedisUtils {
      * @param value
      * @param scoure
      */
+    @SuppressWarnings("unchecked")
     public void zAdd(String key, Object value, double scoure) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
         zset.add(key, value, scoure);
@@ -234,6 +248,7 @@ public class RedisUtils {
      * @param scoure1
      * @return
      */
+    @SuppressWarnings("unchecked")
     public Set<Object> rangeByScore(String key, double scoure, double scoure1) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
         redisTemplate.opsForValue();
@@ -262,6 +277,7 @@ public class RedisUtils {
      * @param key 集合名称
      * @param value 值
      */
+    @SuppressWarnings("unchecked")
     public Long zRank(String key, Object value) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
         return zset.rank(key, value);
@@ -273,10 +289,10 @@ public class RedisUtils {
      *
      * @param key
      */
+    @SuppressWarnings("unchecked")
     public Set<ZSetOperations.TypedTuple<Object>> zRankWithScore(String key, long start, long end) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
-        Set<ZSetOperations.TypedTuple<Object>> ret = zset.rangeWithScores(key, start, end);
-        return ret;
+        return zset.rangeWithScores(key, start, end);
     }
 
     /**
@@ -285,6 +301,7 @@ public class RedisUtils {
      * @param key
      * @param value
      */
+    @SuppressWarnings("unchecked")
     public Double zSetScore(String key, Object value) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
         return zset.score(key, value);
@@ -298,6 +315,7 @@ public class RedisUtils {
      * @param value
      * @param scoure
      */
+    @SuppressWarnings("unchecked")
     public void incrementScore(String key, Object value, double scoure) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
         zset.incrementScore(key, value, scoure);
@@ -309,10 +327,10 @@ public class RedisUtils {
      *
      * @param key
      */
+    @SuppressWarnings("unchecked")
     public Set<ZSetOperations.TypedTuple<Object>> reverseZRankWithScore(String key, long start, long end) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
-        Set<ZSetOperations.TypedTuple<Object>> ret = zset.reverseRangeByScoreWithScores(key, start, end);
-        return ret;
+        return zset.reverseRangeByScoreWithScores(key, start, end);
     }
 
     /**
@@ -320,10 +338,10 @@ public class RedisUtils {
      *
      * @param key
      */
+    @SuppressWarnings("unchecked")
     public Set<ZSetOperations.TypedTuple<Object>> reverseZRankWithRank(String key, long start, long end) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
-        Set<ZSetOperations.TypedTuple<Object>> ret = zset.reverseRangeWithScores(key, start, end);
-        return ret;
+        return zset.reverseRangeWithScores(key, start, end);
     }
 
 }

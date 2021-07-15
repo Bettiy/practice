@@ -17,7 +17,7 @@ import java.util.Date;
 @TableName("m_user")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User1 {
+public class M_User {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;

@@ -83,6 +83,7 @@ public class HelloController {
 
     @ApiOperation("查询所有用户")
     @GetMapping("findAllUser")
+    @SuppressWarnings("unchecked")
     public Result<List<User>> findAllUser() {
         List<User> userList = (List<User>) redisUtils.get("test:user:userinfo");
         if (userList == null) {
