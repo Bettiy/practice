@@ -2,10 +2,12 @@ package com.betty.practice.controller;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.betty.core.entity.Result;
 import com.betty.practice.bean.User;
 import com.betty.practice.service.M_UserService;
 import com.betty.practice.service.UserService;
-import com.betty.practice.utils.result.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
  * @date 2021年07月13日
  */
 @RestController
+@Slf4j
+@SuppressWarnings("rawtypes")
 public class UserController {
 
     @Autowired
@@ -31,20 +35,50 @@ public class UserController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @GetMapping("ge")
+    @GetMapping("lambda")
     public Result test1(String age) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().ge(User::getAge, age);
         List<User> users = userService.list();
         List<User> userList = users.stream().filter(user -> user.getAge() > 21).collect(Collectors.toList());
-        return Result.success(userList);
+        return Result.data(userList);
     }
 
-    @GetMapping("ds")
-    @DS("slave_1")
+    @GetMapping("slave")
+    @DS("slave")
     public Result test2() {
         List<Map<String, Object>> mapList = jdbcTemplate.queryForList("select * from blade_user");
-        return Result.success(mapList);
+        return Result.data(mapList);
+    }
+
+    @GetMapping("slave1")
+    @DS("slave")
+    public Result test3() {
+        List<Map<String, Object>> mapList = jdbcTemplate.queryForList("select * from sys_user");
+        return Result.data(mapList);
+    }
+
+    @GetMapping("update")
+    public Result test4() {
+        User user = new User();
+        user.setId(8L);
+        user.setUsername("菲律宾铁猴子");
+        user.setAge(20);
+        user.setSex("男");
+        return Result.status(userService.updateById(user));
+    }
+
+    @GetMapping("update1")
+    public Result test5() {
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.set("age", 500);
+        updateWrapper.eq("id", 8);
+        return Result.status(userService.update(updateWrapper));
+    }
+
+    @GetMapping("save")
+    public Result save(String name, Integer age, String sex) {
+        return Result.status(userService.save(new User(null, name, age, sex, null)));
     }
 
 }

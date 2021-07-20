@@ -1,4 +1,4 @@
-package com.betty.practice.dao;
+package com.betty.practice.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.betty.practice.bean.M_User;

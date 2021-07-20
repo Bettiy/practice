@@ -2,7 +2,7 @@ package com.betty.practice.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.betty.practice.bean.M_User;
-import com.betty.practice.dao.M_UserMapper;
+import com.betty.practice.mapper.M_UserMapper;
 import com.betty.practice.service.M_UserService;
 import org.springframework.stereotype.Service;
 

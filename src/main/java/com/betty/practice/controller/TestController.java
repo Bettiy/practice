@@ -1,8 +1,10 @@
 package com.betty.practice.controller;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.betty.core.entity.Result;
 import com.betty.practice.bean.User;
 import com.betty.practice.service.AsyncService;
+import com.betty.practice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.concurrent.ScheduledExecutorService;
 @RequestMapping("api")
 @Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
+@SuppressWarnings("rawtypes")
 public class TestController {
 
     @Autowired
@@ -29,19 +32,28 @@ public class TestController {
     }
 
     @GetMapping("url")
-    public String api(String name){
+    public String api(String name) {
         return "hello," + name;
     }
 
     @GetMapping("test1")
-    public String test1(@RequestBody User user){
+    public String test1(@RequestBody User user) {
         log.info("user:{}", user);
         return user.toString();
     }
 
     @GetMapping("/async")
-    public void async(){
+    public void async() {
         asyncService.executeAsync();
+    }
+
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("user")
+    public Result test2() {
+        return Result.data(userService.findUser());
     }
 
 }

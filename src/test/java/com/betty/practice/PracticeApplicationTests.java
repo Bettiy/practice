@@ -1,8 +1,10 @@
 package com.betty.practice;
 
 import com.betty.practice.bean.User;
-import com.betty.practice.dao.UserMapper;
+import com.betty.practice.mapper.UserMapper;
+import com.betty.practice.service.UserService;
 import com.betty.practice.utils.redis.RedisUtils;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,8 @@ import java.util.concurrent.TimeUnit;
  */
 @SpringBootTest
 @Slf4j
-public class PracticeApplicationTests {
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class PracticeApplicationTests implements Runnable {
 
     @Autowired
     private UserMapper userMapper;
@@ -52,7 +55,7 @@ public class PracticeApplicationTests {
 
     @Test
     public void two(){
-        User user = new User(null, "张三", 16, "女");
+        User user = new User(null, "张三", 16, "女", 1);
         int insert = userMapper.insert(user);
     }
 
@@ -65,8 +68,20 @@ public class PracticeApplicationTests {
         log.info("读取出来的内容：{} ", redisUtils.get(key));
     }
 
+    @Autowired
+    UserService userService;
+
     @Test
+    @SneakyThrows
     void contextLoads() {
+        User user = new User().setId(1L).setUsername("凹凸曼");
+        userService.updateById(user);
+        User user1 = new User().setId(1L).setUsername("铁猴子");
+        userService.updateById(user1);
+    }
+
+    @Override
+    public void run() {
 
     }
 

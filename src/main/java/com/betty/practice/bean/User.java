@@ -1,11 +1,10 @@
 package com.betty.practice.bean;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -16,6 +15,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("user")
+@Accessors(chain = true)
 public class User implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
@@ -23,5 +23,8 @@ public class User implements Serializable {
     private String username;
     private Integer age;
     private String sex;
+    @Version
+    @TableField(fill = FieldFill.INSERT)
+    private Integer version;
 
 }

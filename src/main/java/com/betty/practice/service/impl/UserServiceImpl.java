@@ -3,8 +3,8 @@ package com.betty.practice.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.betty.practice.bean.User;
 import com.betty.practice.bean.M_User;
-import com.betty.practice.dao.UserMapper;
-import com.betty.practice.dao.M_UserMapper;
+import com.betty.practice.mapper.UserMapper;
+import com.betty.practice.mapper.M_UserMapper;
 import com.betty.practice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Betty
@@ -30,15 +32,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
 
     @Override
-    public void save() throws Exception{
+    public void save() throws Exception {
         try {
-            mapper.insert(new User(null, "张三", 18, "男"));
+            mapper.insert(new User(null, "张三", 18, "男", 1));
 
             mapper1.insert(new M_User(null, "李四", "1k", "1@qq.com", "ffff", 1, new Date(), new Date()));
-            int i = 1/0;
+            int i = 1 / 0;
         } catch (Exception e) {
             log.error("捕获异常");
             throw new ArithmeticException("0被作为除数");
         }
+    }
+
+    @Override
+    public List<Map<?, ?>> findUser() {
+        return mapper.findUser();
     }
 }

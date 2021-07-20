@@ -1,11 +1,10 @@
 package com.betty.practice.interceptor;
 
 import com.alibaba.fastjson.JSON;
-import com.betty.practice.utils.result.ResultInfo;
-import com.betty.practice.utils.result.CommonEnum;
+import com.betty.core.entity.Result;
+import com.betty.core.entity.ResultCode;
 import com.betty.practice.annotation.AccessLimit;
 import com.betty.practice.utils.redis.RedisUtils;
-import com.betty.practice.utils.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -14,6 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @desc 防刷接口拦截器
@@ -55,7 +55,7 @@ public class BrushProofInterceptor extends HandlerInterceptorAdapter {
                 count += 1;
                 redisUtils.set(key, count, seconds);
             } else {
-                render(response, CommonEnum.SERVER_BUSY);
+                render(response);
                 return false;
             }
         }
@@ -63,11 +63,11 @@ public class BrushProofInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-    private void render(HttpServletResponse response, ResultInfo cm) throws Exception {
+    private void render(HttpServletResponse response) throws Exception {
         response.setContentType("application/json;charset=UTF-8");
         OutputStream out = response.getOutputStream();
-        String str = JSON.toJSONString(Result.error(cm));
-        out.write(str.getBytes("UTF-8"));
+        String str = JSON.toJSONString(Result.error(ResultCode.REQ_REJECT));
+        out.write(str.getBytes(StandardCharsets.UTF_8));
         out.flush();
         out.close();
     }

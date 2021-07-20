@@ -1,16 +1,13 @@
 package com.betty.practice.controller;
 
-import com.betty.practice.annotation.Log;
+import com.betty.core.entity.Result;
+import com.betty.core.entity.ResultCode;
 import com.betty.practice.bean.User;
-import com.betty.practice.dao.UserMapper;
+import com.betty.practice.mapper.UserMapper;
 import com.betty.practice.service.UserService;
-import com.betty.practice.annotation.AccessLimit;
 import com.betty.practice.utils.redis.RedisUtils;
-import com.betty.practice.utils.result.CommonEnum;
-import com.betty.practice.utils.result.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +26,7 @@ import java.util.Map;
 @Slf4j
 @Api(value = "myApi", tags = "API测试接口")
 @CrossOrigin(origins = "*", maxAge = 3600)
+@SuppressWarnings("rawtypes")
 public class HelloController {
 
     @Autowired
@@ -40,25 +38,6 @@ public class HelloController {
     @Resource
     private RedisUtils redisUtils;
 
-    @AccessLimit(seconds = 3600, maxCount = 5)
-    @ApiOperation("测试接口1")
-    @PostMapping("hello")
-    @Log
-    public Result hello(@ApiParam(name = "测试参数姓名") String name) {
-        User user = new User(null,"张三", 18, "女");
-        log.info("hello,{}是一个憨憨", user.getUsername());
-        return Result.success(CommonEnum.SUCCESS, user);
-    }
-
-    @AccessLimit(seconds=60, maxCount=5)
-    @ApiOperation("测试接口2")
-    @GetMapping("test")
-    public Result test(){
-        User user = new User(null,"张三", 14, "男");
-        int i = 1/0;
-        return Result.success("张三测试了test接口",user);
-    }
-
     @ApiOperation("测试接口3")
     @GetMapping("test1")
     public Result<List<Map<String, Object>>> test1(){
@@ -66,7 +45,7 @@ public class HelloController {
         dataMap.put("A_NAME", "成都");
         List<Map<String, Object>> list = new ArrayList<>();
         list.add(dataMap);
-        return Result.success(list);
+        return Result.data(list);
     }
 
     @ApiOperation("添加用户")
@@ -78,7 +57,7 @@ public class HelloController {
         user.setSex("女");
         int insert = userMapper.insert(user);
         log.info("添加成功，状态码{}", insert);
-        return Result.success(CommonEnum.SUCCESS, user);
+        return Result.success(ResultCode.SUCCESS);
     }
 
     @ApiOperation("查询所有用户")
@@ -91,7 +70,7 @@ public class HelloController {
             userList = userMapper.selectList(null);
             redisUtils.set("test:user:userinfo", userList, 60L);
         }
-        return Result.success(CommonEnum.SUCCESS, userList);
+        return Result.data(200, userList, "jj");
     }
 
     @ApiOperation("测试redis")
@@ -100,14 +79,14 @@ public class HelloController {
         //定义字符串内容及存入缓存的key
         redisUtils.set(key, value, 120L);
         log.info("读取出来的内容：{} ", redisUtils.get(key));
-        return Result.success(CommonEnum.SUCCESS, redisUtils.get(key));
+        return Result.data(redisUtils.get(key));
     }
 
     @ApiOperation("测试事务")
     @GetMapping("saveUser")
     public Result saveUser() throws Exception {
         userService.save();
-        return Result.success();
+        return Result.success(ResultCode.SUCCESS);
     }
 
 }

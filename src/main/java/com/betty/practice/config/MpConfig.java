@@ -1,8 +1,8 @@
 package com.betty.practice.config;
 
-import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import org.mybatis.spring.annotation.MapperScan;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.betty.practice.component.MyOptimisticLockerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,23 +11,33 @@ import org.springframework.context.annotation.Configuration;
  * @author Betty
  */
 @Configuration
-@MapperScan("com.betty.practice.dao")
 public class MpConfig {
 
     /**
-     * 乐观锁插件
+     * 旧版--乐观锁插件
+     */
+    /*@Bean
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
+        return new OptimisticLockerInterceptor();
+    }*/
+
+    /**
+     * 新版
      */
     @Bean
-    public OptimisticLockerInterceptor optimisticLockerInnerInterceptor() {
-        return new OptimisticLockerInterceptor();
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
+        // 添加乐观锁插件
+        mybatisPlusInterceptor.addInnerInterceptor(new MyOptimisticLockerInterceptor());
+        return mybatisPlusInterceptor;
     }
 
     /**
      * 分页插件
      */
     @Bean
-    public PaginationInterceptor paginationInterceptor(){
-        return new PaginationInterceptor();
+    public PaginationInnerInterceptor paginationInnerInterceptor() {
+        return new PaginationInnerInterceptor();
     }
 
     /**
