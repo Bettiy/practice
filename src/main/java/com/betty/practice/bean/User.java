@@ -27,4 +27,6 @@ public class User implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Integer version;
 
+    private transient Role role;
+
 }

@@ -82,11 +82,4 @@ public class HelloController {
         return Result.data(redisUtils.get(key));
     }
 
-    @ApiOperation("测试事务")
-    @GetMapping("saveUser")
-    public Result saveUser() throws Exception {
-        userService.save();
-        return Result.success(ResultCode.SUCCESS);
-    }
-
 }

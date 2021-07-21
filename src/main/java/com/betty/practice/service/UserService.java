@@ -11,7 +11,8 @@ import java.util.Map;
  * @date 2021年04月30日
  */
 public interface UserService extends IService<User> {
-    void save() throws Exception;
 
     List<Map<? ,?>> findUser();
+
+    List<User> selectAllUser();
 }

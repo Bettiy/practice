@@ -54,12 +54,6 @@ public class PracticeApplicationTests implements Runnable {
     }
 
     @Test
-    public void two(){
-        User user = new User(null, "张三", 16, "女", 1);
-        int insert = userMapper.insert(user);
-    }
-
-    @Test
     public void three() {
         //定义字符串内容及存入缓存的key
         final String key = "redis:template:userinfo:MrLi";

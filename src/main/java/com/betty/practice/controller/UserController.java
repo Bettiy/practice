@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.betty.core.entity.Result;
 import com.betty.practice.bean.User;
-import com.betty.practice.service.M_UserService;
 import com.betty.practice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private M_UserService mUserService;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -77,8 +73,17 @@ public class UserController {
     }
 
     @GetMapping("save")
-    public Result save(String name, Integer age, String sex) {
-        return Result.status(userService.save(new User(null, name, age, sex, null)));
+    public Result save() {
+        User user = new User();
+        user.setUsername("龙开环");
+        user.setAge(12);
+        user.setSex("未知");
+        return Result.status(userService.save(user));
+    }
+
+    @GetMapping("selectAllUser")
+    public Result selectAllUser() {
+        return Result.data(userService.selectAllUser());
     }
 
 }

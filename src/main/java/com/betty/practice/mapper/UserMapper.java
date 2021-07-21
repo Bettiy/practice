@@ -15,4 +15,6 @@ import java.util.Map;
 public interface UserMapper extends BaseMapper<User> {
     @MapKey("id")
     List<Map<?, ?>> findUser();
+
+    List<User> selectAllUser();
 }
