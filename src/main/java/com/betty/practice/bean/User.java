@@ -1,19 +1,18 @@
 package com.betty.practice.bean;
 
 import com.baomidou.mybatisplus.annotation.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Betty
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@ToString
 @TableName("user")
 @Accessors(chain = true)
 public class User implements Serializable {
@@ -27,6 +26,6 @@ public class User implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Integer version;
 
-    private transient Role role;
+    private transient List<Role> role;
 
 }

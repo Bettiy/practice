@@ -83,7 +83,9 @@ public class UserController {
 
     @GetMapping("selectAllUser")
     public Result selectAllUser() {
-        return Result.data(userService.selectAllUser());
+		List<User> userList = userService.selectAllUser();
+		userList.forEach(System.out::println);
+		return Result.data(userList);
     }
 
 }
