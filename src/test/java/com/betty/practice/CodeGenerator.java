@@ -60,7 +60,7 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
         //设置要映射的表名（匹配生成以edu开头的所有表，如果要是生成单表，直接写上要生成的表名即可）
         //strategy.setInclude(moduleName + "_\\w*");
-        strategy.setInclude("blog");
+        strategy.setInclude("book");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 
