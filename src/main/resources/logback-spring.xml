@@ -117,6 +117,20 @@
         </filter>
     </appender>
 
+    <!--配置异步日志-->
+    <appender name="CONSOLE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="CONSOLE" />
+    </appender>
+    <appender name="INFO_FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="INFO_FILE" />
+    </appender>
+    <appender name="WARN_FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="WARN_FILE" />
+    </appender>
+    <appender name="ERROR_FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="ERROR_FILE" />
+    </appender>
+
     <!--
         <logger>用来设置某一个包或者具体的某一个类的日志打印级别、以及指定<appender>。
         <logger>仅有一个name属性，
@@ -141,10 +155,10 @@
             可以包含零个或多个appender元素。
         -->
         <root level="INFO">
-            <appender-ref ref="CONSOLE" />
-            <appender-ref ref="INFO_FILE" />
-            <appender-ref ref="WARN_FILE" />
-            <appender-ref ref="ERROR_FILE" />
+            <appender-ref ref="CONSOLE_ASYNC" />
+            <appender-ref ref="INFO_FILE_ASYNC" />
+            <appender-ref ref="WARN_FILE_ASYNC" />
+            <appender-ref ref="ERROR_FILE_ASYNC" />
         </root>
     </springProfile>
 
