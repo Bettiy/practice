@@ -10,6 +10,7 @@
         <!--%L日志的位置行数-->
         <!--%M日志的方法名-->
         <property name="console_pattern" value="%clr{%d{yyyy-MM-dd HH:mm:ss}}{yellow} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{yellow} %clr{[%15.15t]}{boldMagenta} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %clr{%m%n%xwEx}{blue}" />
+        <property name="log_save_pattern" value="[%d{HH:mm:ss:SSS}] [%p] - %c{20} - %m%n" />
     </properties>
 
     <appenders>
@@ -22,7 +23,7 @@
                      filePattern="${log.path}/info/log-info-%d{yyyy-MM-dd}-%i.log">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <PatternLayout pattern="${log_save_pattern}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="50 MB"/>
@@ -32,7 +33,7 @@
         <RollingFile name="RollingFileWarn" fileName="${log.path}/log_warn.log"
                      filePattern="${log.path}/warn/log-warn-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <PatternLayout pattern="${log_save_pattern}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="50 MB"/>
@@ -43,7 +44,7 @@
         <RollingFile name="RollingFileError" fileName="${log.path}/log_error.log"
                      filePattern="${log.path}/error/log-error-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <PatternLayout pattern="${log_save_pattern}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="50 MB"/>
