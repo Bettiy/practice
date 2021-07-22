@@ -27,6 +27,7 @@
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="20"/>
         </RollingFile>
         <RollingFile name="RollingFileWarn" fileName="${log.path}/log_warn.log"
                      filePattern="${log.path}/warn/log-warn-%d{yyyy-MM-dd}-%i.log">
@@ -47,6 +48,7 @@
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="20"/>
         </RollingFile>
     </appenders>
 
