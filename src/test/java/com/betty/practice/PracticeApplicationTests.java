@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,9 +22,9 @@ import java.util.concurrent.TimeUnit;
 @SpringBootTest
 @Slf4j
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class PracticeApplicationTests implements Runnable {
+public class PracticeApplicationTests {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     //由于之前已经自定义注入RedisTemplate组件，因而在此可以直接自动装配
@@ -72,11 +73,6 @@ public class PracticeApplicationTests implements Runnable {
         userService.updateById(user);
         User user1 = new User().setId(1L).setUsername("铁猴子");
         userService.updateById(user1);
-    }
-
-    @Override
-    public void run() {
-
     }
 
 }

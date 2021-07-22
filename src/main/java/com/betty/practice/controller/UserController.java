@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @Slf4j
+@RequestMapping("user")
 @SuppressWarnings("rawtypes")
 public class UserController {
 
@@ -84,7 +86,6 @@ public class UserController {
     @GetMapping("selectAllUser")
     public Result selectAllUser() {
 		List<User> userList = userService.selectAllUser();
-		userList.forEach(System.out::println);
 		return Result.data(userList);
     }
 

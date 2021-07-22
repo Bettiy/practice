@@ -22,7 +22,7 @@ import java.util.Map;
  * @author Betty
  */
 @RestController
-@RequestMapping("practice")
+@RequestMapping("hello")
 @Slf4j
 @Api(value = "myApi", tags = "API测试接口")
 @CrossOrigin(origins = "*", maxAge = 3600)

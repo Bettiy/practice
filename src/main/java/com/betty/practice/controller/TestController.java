@@ -15,7 +15,7 @@ import java.util.concurrent.ScheduledExecutorService;
  * @author Betty
  */
 @RestController
-@RequestMapping("api")
+@RequestMapping("test")
 @Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
 @SuppressWarnings("rawtypes")
