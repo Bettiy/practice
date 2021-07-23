@@ -54,3 +54,6 @@ mybatis-plus:
       id-type: auto # 主键类型
   mapper-locations: classpath:com/betty/practice/mapper/xml/*.xml
   type-aliases-package: com.betty.practice.bean
+
+upload:
+  path: D:\Upload\practice\file\

@@ -17,7 +17,6 @@ import java.util.concurrent.ScheduledExecutorService;
 @RestController
 @RequestMapping("test")
 @Slf4j
-@CrossOrigin(origins = "*", maxAge = 3600)
 @SuppressWarnings("rawtypes")
 public class TestController {
 

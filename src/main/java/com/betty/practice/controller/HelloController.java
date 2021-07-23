@@ -25,7 +25,6 @@ import java.util.Map;
 @RequestMapping("hello")
 @Slf4j
 @Api(value = "myApi", tags = "API测试接口")
-@CrossOrigin(origins = "*", maxAge = 3600)
 @SuppressWarnings("rawtypes")
 public class HelloController {
 
