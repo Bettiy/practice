@@ -6,7 +6,7 @@
 
     <properties>
         <!-- name的值是变量的名称，value的值时变量定义的值。通过定义的值会被插入到logger上下文中。定义变量后，可以使“${}”来使用变量。 -->
-        <property name="log.path" value="/data/web/cloud/logs/practice"/>
+        <property name="log.path" value="/Logs/practice"/>
         <property name="console_pattern" value="%clr{%d{yyyy-MM-dd HH:mm:ss}}{yellow} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{yellow} %clr{[%15.15t]}{boldMagenta} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %clr{%m%n%xwEx}{blue}" />
         <property name="log_save_pattern" value="[%d{HH:mm:ss:SSS}] [%p] - %c{20} - %m%n" />
     </properties>

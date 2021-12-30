@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.betty.practice.mapper.InfoMapper">
+
+    <resultMap id="dd" type="dataDetail">
+        <result column="source_data" property="sourceData"/>
+        <result column="interface_data" property="interfaceData" />
+    </resultMap>
+
+    <insert id="insertList" parameterType="dataDetail">
+        insert into person_info(source_data, interface_data)
+        value
+        <foreach collection="list" separator="," item="i">
+            (#{i.sourceData}, #{i.interfaceData})
+        </foreach>
+    </insert>
+</mapper>

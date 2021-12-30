@@ -19,7 +19,7 @@ public final class NetworkUtil {
      * @return
      * @throws IOException
      */
-    public final static String getIpAddress(HttpServletRequest request) throws IOException {
+    public static String getIpAddress(HttpServletRequest request) throws IOException {
         // 获取请求主机IP地址,如果通过代理进来，则透过防火墙获取真实IP地址
 
         String ip = request.getHeader("X-Forwarded-For");
@@ -60,13 +60,12 @@ public final class NetworkUtil {
             }
         } else if (ip.length() > 15) {
             String[] ips = ip.split(",");
-            for (int index = 0; index < ips.length; index++) {
-                String strIp = (String) ips[index];
-                if (!("unknown".equalsIgnoreCase(strIp))) {
-                    ip = strIp;
-                    break;
-                }
-            }
+			for (String s : ips) {
+				if (!("unknown".equalsIgnoreCase(s))) {
+					ip = s;
+					break;
+				}
+			}
         }
         return ip;
     }

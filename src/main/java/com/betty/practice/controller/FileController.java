@@ -39,6 +39,10 @@ public class FileController {
 	@SneakyThrows
 	@GetMapping("{filename}")
 	public void download(@PathVariable("filename") String filename, HttpServletResponse response) {
+		File file = new File(path + filename);
+		if (!file.exists()) {
+			throw new PracticeException("文件不存在");
+		}
 		String fileName = new String(filename.getBytes(StandardCharsets.UTF_8), "ISO8859-1");
 		InputStream in = new FileInputStream(path + filename);
 		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);

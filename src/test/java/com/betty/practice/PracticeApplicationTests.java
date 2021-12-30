@@ -1,6 +1,10 @@
 package com.betty.practice;
 
+import cn.hutool.poi.excel.ExcelReader;
+import cn.hutool.poi.excel.ExcelUtil;
+import com.betty.practice.bean.DataDetail;
 import com.betty.practice.bean.User;
+import com.betty.practice.mapper.InfoMapper;
 import com.betty.practice.mapper.UserMapper;
 import com.betty.practice.service.UserService;
 import com.betty.practice.utils.redis.RedisUtils;
@@ -14,6 +18,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -74,5 +80,16 @@ public class PracticeApplicationTests {
         User user1 = new User().setId(1L).setUsername("铁猴子");
         userService.updateById(user1);
     }
+
+	@Autowired
+	InfoMapper infoMapper;
+
+	@Test
+	void read() {
+		File file = new File("D:\\个人客户基本信息.xlsx");
+		ExcelReader excelReader = ExcelUtil.getReader(file, "码值");
+		List<DataDetail> list = excelReader.readAll(DataDetail.class);
+		infoMapper.insertList(list);
+	}
 
 }

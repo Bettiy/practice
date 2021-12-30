@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface UserService extends IService<User> {
 
-    List<Map<? ,?>> findUser();
+	List<Map<String, String>> findUser();
 
     List<User> selectAllUser();
 }

@@ -25,7 +25,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserMapper mapper;
 
     @Override
-    public List<Map<?, ?>> findUser() {
+    public List<Map<String, String>> findUser() {
         return mapper.findUser();
     }
 

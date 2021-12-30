@@ -7,7 +7,10 @@ import com.betty.practice.service.AsyncService;
 import com.betty.practice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -54,5 +57,11 @@ public class TestController {
     public Result test2() {
         return Result.data(userService.findUser());
     }
+
+	@GetMapping("log")
+	public void log4j2Test() {
+		log.info("hello");
+		System.out.println("==============");
+	}
 
 }
