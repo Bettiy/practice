@@ -6,7 +6,7 @@ root = true                     # 表明是最顶层的配置文件，发现设�
 indent_style = space
 indent_size = 4
 charset = utf-8                 # 文件的charset。有以下几种类型：latin1, utf-8, utf-8-bom, utf-16be, utf-16le
-end_of_line = crlf              # 换行符的类型。lf, cr, crlf三种
+end_of_line = lf              # 换行符的类型。lf, cr, crlf三种
 trim_trailing_whitespace = true # 是否将行尾空格自动删除
 insert_final_newline = true     # 是否使文件以一个空白行结尾
 
